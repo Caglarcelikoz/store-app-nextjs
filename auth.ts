@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/db/prisma";
 import { cookies } from "next/headers";
 import { compareSync } from "bcrypt-ts-edge";
+
 export const config = {
   pages: {
     signIn: "/sign-in",
@@ -25,7 +26,6 @@ export const config = {
       },
       async authorize(credentials) {
         if (!credentials) return null;
-
         const user = await prisma.user.findFirst({
           where: { email: credentials.email as string },
         });
@@ -54,28 +54,10 @@ export const config = {
       session.user.name = token.name;
       return session;
     },
-    async jwt({ token, user, trigger }: any) {
+    async jwt({ token, user }: any) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
-        if (trigger === "signIn" || trigger === "signUp") {
-          const cookiesObject = await cookies();
-          const sessionCartId = cookiesObject.get("sessionCartId")?.value;
-          if (sessionCartId) {
-            const sessionCart = await prisma.cart.findFirst({
-              where: { sessionCartId },
-            });
-            if (sessionCart) {
-              await prisma.cart.deleteMany({
-                where: { userId: user.id },
-              });
-              await prisma.cart.update({
-                where: { id: sessionCart.id },
-                data: { userId: user.id },
-              });
-            }
-          }
-        }
       }
       return token;
     },
