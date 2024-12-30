@@ -4,13 +4,13 @@ import { getToken } from "next-auth/jwt";
 
 // Define the paths you want to protect
 const protectedPaths = [
-  "/shipping-address",
-  "/payment-method",
-  "/place-order",
-  "/profile",
-  /^\/user\//,
-  /^\/order\//,
-  /^\/admin\//,
+  /\/shipping-address/,
+  /\/payment-method/,
+  /\/place-order/,
+  /\/profile/,
+  /\/user\/(.*)/,
+  /\/order\/(.*)/,
+  /\/admin/,
 ];
 
 export async function middleware(req: NextRequest) {
