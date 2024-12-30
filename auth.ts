@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,7 +6,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextResponse } from "next/server";
 import { prisma } from "@/db/prisma";
 import { cookies } from "next/headers";
-
+import { compareSync } from "bcrypt-ts-edge";
 export const config = {
   pages: {
     signIn: "/sign-in",
