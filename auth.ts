@@ -30,7 +30,6 @@ export const config = {
         const user = await prisma.user.findFirst({
           where: { email: credentials.email as string },
         });
-
         if (user && user.password) {
           const isMatch = compareSync(
             credentials.password as string,
@@ -91,11 +90,8 @@ export const config = {
         /\/order\/(.*)/,
         /\/admin/,
       ];
-
       const { pathname } = request.nextUrl;
-
       if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
-
       if (!request.cookies.get("sessionCartId")) {
         const sessionCartId = crypto.randomUUID();
         const newRequestHeaders = new Headers(request.headers);
@@ -110,5 +106,4 @@ export const config = {
     },
   },
 } satisfies NextAuthConfig;
-
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
