@@ -5,7 +5,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextResponse } from "next/server";
 import { prisma } from "@/db/prisma";
-import { cookies } from "next/headers";
 import { compareSync } from "bcrypt-ts-edge";
 
 export const config = {
