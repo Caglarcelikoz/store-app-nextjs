@@ -48,7 +48,7 @@ export const config = {
   matcher: [
     "/shipping-address",
     "/cart",
-    "product/:path*",
+    "/product/:path*",
     "/payment-method",
     "/place-order",
     "/profile",
