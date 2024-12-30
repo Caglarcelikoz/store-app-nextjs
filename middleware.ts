@@ -43,3 +43,9 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
+
+export const config = {
+  matcher: [
+    /^\/(shipping-address|payment-method|place-order|profile|user\/.*|order\/.*|admin).*$/,
+  ],
+};
