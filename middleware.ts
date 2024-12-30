@@ -43,15 +43,3 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-// Specify the matcher to apply the middleware to desired routes
-export const config = {
-  matcher: [
-    "/shipping-address",
-    "/payment-method",
-    "/place-order",
-    "/profile",
-    "/user/:path*",
-    "/order/:path*",
-    "/admin/:path*",
-  ],
-};
